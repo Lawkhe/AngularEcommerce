@@ -215,12 +215,11 @@ export function getHeaders(opt?){
   if (!opt){
     reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Token ' + user.token
+      'Authorization': 'Bearer ' + user.token
     });
   } else {
     reqHeader = new HttpHeaders({
-      // 'Content-Type': 'application/json',
-      'Authorization': 'Token ' + user.token
+      'Authorization': 'Bearer ' + user.token
     });
   }
   return reqHeader;

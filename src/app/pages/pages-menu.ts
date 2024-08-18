@@ -10,8 +10,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Usuarios',
-    icon: 'user',
-    link: '/pages/user/view',
+    icon: 'people',
+    link: '/pages/user',
     data: "ADMIN",
-  }
+  },
+  {
+    title: 'Productos',
+    icon: 'shopping-cart',
+    data: "ADMIN",
+    children: [
+      {
+        title: 'Categorías',
+        link: '/pages/category',
+      },
+      {
+        title: 'Ítems',
+        link: '/pages/product',
+      },
+    ],
+  },
 ];

@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SwitchService } from '../services/switch.service';
 
 import { MENU_ITEMS } from './pages-menu';
 
@@ -22,7 +21,6 @@ export class PagesComponent implements OnInit{
 
   constructor(
     private router: Router,
-    private modalSS:SwitchService,
   ) {}
 
   ngOnInit(): void {
@@ -41,10 +39,6 @@ export class PagesComponent implements OnInit{
 
   onclick(){
     let url_parts = this.router.url.split('/');
-    if(url_parts[1]=="pages" && url_parts[2]=="inbox"){
-      setTimeout(()=>{
-          this.modalSS.$modalsing.emit(0)
-      }, 300);
-    }
+    if(url_parts[1]=="pages"){}
   }
 }

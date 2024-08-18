@@ -40,8 +40,9 @@ export class LoginComponent extends NbLoginComponent implements OnInit {
   onLogin(data) {
     this.siteService.login(data).subscribe(response => {
       let token_response = decodeJwtPayload(response['token']);
-      this.siteService.getUserLogin(response['token'], token_response['sub']).subscribe(response => {
-        localStorage.setItem('session', JSON.stringify(response));
+      this.siteService.getUserLogin(response['token'], token_response['sub']).subscribe(data_user => {
+        data_user['token'] = response['token']
+        localStorage.setItem('session', JSON.stringify(data_user));
         const view:string = '/pages/dashboard';
         this.router.navigate([view, {}]);
       });

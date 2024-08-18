@@ -6,11 +6,6 @@ import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServ
 import { LayoutService } from '../../../@core/utils';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { BASE_URL } from '../../../services/site.service';
-import { EnterpriseService } from '../../../services/enterprise.service';
-import { WsSendService } from '../../../services/ws-send.service';
-import { ToastService } from '../../../usable/toast.service';
-import { UserService } from '../../../services/user.service';
 
 export interface Notification_Scheme {
   icon: string,
@@ -72,13 +67,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
-              private userService: UserService,
-              private enterpriseService: EnterpriseService,
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
-              private router:Router,
-              private http:HttpClient,
-              private toastService:ToastService) {
+              private router:Router
+            ) {
   }
 
   ngOnInit() {
@@ -104,12 +96,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (title == "Cerrar Sesión"){
           let user = JSON.parse(localStorage.getItem('session')) || null;
           if (user){
-            // const reqHeader = new HttpHeaders({
-            //   'Content-Type': 'application/json',
-            //   'Authorization': 'Token ' + user.token
-            // });
-            // const path = BASE_URL + 'auth/logout';
-            // this.http.get<{}>(path, { headers: reqHeader }).toPromise().then(response => {});
             localStorage.removeItem('session');
           }
           this.router.navigate(['/login']);
