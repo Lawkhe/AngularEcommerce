@@ -171,3 +171,7 @@
   color: #FFF;
   font-weight: 700;
 }
+
+::ng-deep nb-layout-header {
+  box-shadow: 0 .5rem 1rem #2c33491a;
+}

@@ -43,7 +43,7 @@ export class LoginComponent extends NbLoginComponent implements OnInit {
       this.siteService.getUserLogin(response['token'], token_response['sub']).subscribe(data_user => {
         data_user['token'] = response['token']
         localStorage.setItem('session', JSON.stringify(data_user));
-        const view:string = '/pages/dashboard';
+        const view:string = data_user['role'] == 'ADMIN' ? '/pages/dashboard' : '/pages/buy';
         this.router.navigate([view, {}]);
       });
     }, error => {

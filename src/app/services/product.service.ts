@@ -12,7 +12,7 @@ export class ProductService {
   view() {
     const reqHeader = getHeaders();
     const path = BASE_URL + 'api/products';
-    return this.http.get<{}>(path, { headers: reqHeader });
+    return this.http.get<[]>(path, { headers: reqHeader });
   }
 
   create(user_data: {}) {

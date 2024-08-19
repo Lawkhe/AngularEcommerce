@@ -1,0 +1,20 @@
+<div class="row">
+
+  <div *ngFor="let product of list_products" class="col-12 col-md-4">
+    <nb-card size="medium">
+      <nb-card-header>{{ product.name }}</nb-card-header>
+      <nb-card-body>
+        <div class="content_product_image">
+          <img class="product_image" src="{{ product.image }}" alt="">
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <div class="content_btn">
+          <button nbButton hero status="primary">Comprar Ahora</button>
+          <button nbButton outline status="primary">Agregar</button>
+        </div>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+
+</div>

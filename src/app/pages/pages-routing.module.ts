@@ -8,6 +8,7 @@ import { UserComponent } from './user/user.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
 import { DiscountComponent } from './discount/discount.component';
+import { BuyComponent } from './buy/buy.component';
 
 const routes: Routes = [{
   path: '',
@@ -32,6 +33,10 @@ const routes: Routes = [{
     {
       path: 'discount',
       component: DiscountComponent,
+    },
+    {
+      path: 'buy',
+      component: BuyComponent,
     },
     {
       path: '',

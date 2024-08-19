@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { DiscountModule } from './discount/discount.module';
+import { BuyModule } from './buy/buy.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { DiscountModule } from './discount/discount.module';
     UserModule,
     CategoryModule,
     ProductModule,
-    DiscountModule
+    DiscountModule,
+    BuyModule
   ],
   declarations: [
     PagesComponent,
