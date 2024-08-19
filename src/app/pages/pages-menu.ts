@@ -34,6 +34,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'Auditoria',
+    icon: 'browser',
+    link: '/pages/audit',
+    data: "ADMIN",
+  },
+  {
     title: 'Comprar',
     icon: 'shopping-cart',
     link: '/pages/buy',

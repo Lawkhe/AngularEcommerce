@@ -11,6 +11,7 @@ import { DiscountComponent } from './discount/discount.component';
 import { BuyComponent } from './buy/buy.component';
 import { FinishComponent } from './buy/finish/finish.component';
 import { RecordComponent } from './record/record.component';
+import { AuditComponent } from './audit/audit.component';
 
 const routes: Routes = [{
   path: '',
@@ -35,6 +36,10 @@ const routes: Routes = [{
     {
       path: 'discount',
       component: DiscountComponent,
+    },
+    {
+      path: 'audit',
+      component: AuditComponent,
     },
     {
       path: 'buy',

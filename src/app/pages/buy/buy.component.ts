@@ -3,6 +3,7 @@ import { ProductService } from '../../services/product.service';
 import { ToastService } from '../../usable/toast.service';
 import { Router } from '@angular/router';
 import { DiscountService } from '../../services/discount.service';
+import { AuditService } from '../../services/audit.service';
 
 @Component({
   selector: 'ngx-buy',
@@ -18,6 +19,7 @@ export class BuyComponent implements OnInit {
   constructor(
     private productService:ProductService,
     private discountService:DiscountService,
+    private auditService:AuditService,
     private toastService: ToastService,
     private router:Router
   ) {
@@ -43,6 +45,7 @@ export class BuyComponent implements OnInit {
     if (product) {
       product['discount'] = 50;
       this.addProduct(product, true);
+      this.addAudit('Descuento obtenido: ' + product.name + ' fue agregado a la compra con descuento.');
       this.toastService.showToast('success', 'Descuento', product.name + ' agregado con descuento.');
       this.random = false;
     }
@@ -63,6 +66,7 @@ export class BuyComponent implements OnInit {
           this.toastService.showToast('warning', 'Ya existe!', product.name + ' ya esta agregado.');
         }
       } else {
+        this.addAudit(product.name + ' fue agregado a la compra.');
         this.toastService.showToast('success', 'Producto Agregado', product.name + ' fue agregado correctamente.');
         cart.push(product)
       }
@@ -70,6 +74,7 @@ export class BuyComponent implements OnInit {
 
     } else {
       data_cart = [product]
+      this.addAudit(product.name + ' fue agregado a la compra.');
       this.toastService.showToast('success', 'Producto Agregado', product.name + ' fue agregado correctamente.');
     }
     localStorage.removeItem('cart');
@@ -83,6 +88,15 @@ export class BuyComponent implements OnInit {
 
   goFinish() {
     this.router.navigate(['/pages/buy/finish']);
+  }
+
+  addAudit(description) {
+    let user = JSON.parse(localStorage.getItem('session')) || null;
+    let data = {
+      userId: user.id,
+      description: description
+    }
+    this.auditService.create(data).subscribe(response => {});
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../usable/toast.service';
 import { BuyService } from '../../../services/buy.service';
+import { AuditService } from '../../../services/audit.service';
 
 @Component({
   selector: 'ngx-finish',
@@ -20,6 +21,7 @@ export class FinishComponent implements OnInit {
     private router:Router,
     private toastService: ToastService,
     private buyService: BuyService,
+    private auditService:AuditService,
   ) {
     this.cart = JSON.parse(localStorage.getItem('cart')) || null;
 
@@ -64,10 +66,12 @@ export class FinishComponent implements OnInit {
   }
 
   removeProduct(index) {
+    this.addAudit('Retiro un producto de la compra.');
     this.cart.splice(index, 1);
   }
 
   cancelBuy() {
+    this.addAudit('Cancelo la compra.');
     localStorage.removeItem('cart');
     this.router.navigate(['/pages/buy']);
   }
@@ -97,6 +101,7 @@ export class FinishComponent implements OnInit {
       this.buyService.create(data).subscribe(response => {
         localStorage.removeItem('cart');
         this.toastService.showToast('success', 'Gracias por tu compra!', 'Compra realizada correctamente.');
+        this.addAudit('Realizado la compra correctamente.');
         this.router.navigate(['/pages/record']);
       })
 
@@ -106,6 +111,15 @@ export class FinishComponent implements OnInit {
       );
 
     }
+  }
+
+  addAudit(description) {
+    let user = JSON.parse(localStorage.getItem('session')) || null;
+    let data = {
+      userId: user.id,
+      description: description
+    }
+    this.auditService.create(data).subscribe(response => {});
   }
 
 }

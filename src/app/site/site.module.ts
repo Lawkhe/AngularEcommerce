@@ -1,4 +1,3 @@
-import { ToastService } from './../usable/toast.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -18,8 +17,6 @@ import {
 } from '@nebular/theme';
 
 import { LoginComponent } from './login/login.component';
-import { SiteService } from '../services/site.service';
-import { RecoverComponent } from './recover/recover.component';
 import { CodeInputModule } from 'angular-code-input';
 
 @NgModule({
@@ -39,13 +36,8 @@ import { CodeInputModule } from 'angular-code-input';
     NbSpinnerModule,
   ],
   declarations: [
-    // ... here goes our new components
-    LoginComponent,
-    RecoverComponent
+    LoginComponent
   ],
-  providers: [
-    // SiteService,
-    // ToastService,
-  ]
+  providers: []
 })
 export class SiteModule { }
