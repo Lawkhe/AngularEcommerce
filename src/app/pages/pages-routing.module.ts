@@ -9,6 +9,8 @@ import { CategoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
 import { DiscountComponent } from './discount/discount.component';
 import { BuyComponent } from './buy/buy.component';
+import { FinishComponent } from './buy/finish/finish.component';
+import { RecordComponent } from './record/record.component';
 
 const routes: Routes = [{
   path: '',
@@ -36,7 +38,20 @@ const routes: Routes = [{
     },
     {
       path: 'buy',
-      component: BuyComponent,
+      children:[
+        {
+          path:'',
+          component: BuyComponent,
+        },
+        {
+          path:'finish',
+          component: FinishComponent,
+        }
+      ]
+    },
+    {
+      path: 'record',
+      component: RecordComponent,
     },
     {
       path: '',

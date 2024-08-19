@@ -1,17 +1,33 @@
 <div class="row">
 
+  <div class="col-12">
+    <nb-card>
+      <nb-card-header style="text-align: center;">
+        <button *ngIf="random" nbButton outline status="success" (click)="randomProduct()">Pedido Aleatorio</button>
+        <button *ngIf="!random" nbButton outline status="primary" (click)="goFinish()">Ir a Comprar</button>
+      </nb-card-header>
+    </nb-card>
+  </div>
+
   <div *ngFor="let product of list_products" class="col-12 col-md-4">
     <nb-card size="medium">
-      <nb-card-header>{{ product.name }}</nb-card-header>
+      <nb-card-header>
+        {{ product.name }}
+      </nb-card-header>
       <nb-card-body>
         <div class="content_product_image">
+          <nb-badge *ngIf="list_discount.length > 0" text="10% OFF" status="success" position="top right"></nb-badge>
           <img class="product_image" src="{{ product.image }}" alt="">
         </div>
       </nb-card-body>
       <nb-card-footer>
+        <div class="content_info">
+          <h6>{{ product.price | currency: 'COP' }}</h6>
+          <label for="">Cantidad: {{ product.amount }}</label>
+        </div>
         <div class="content_btn">
-          <button nbButton hero status="primary">Comprar Ahora</button>
-          <button nbButton outline status="primary">Agregar</button>
+          <button nbButton hero status="primary" (click)="buyProduct(product)">Comprar Ahora</button>
+          <button nbButton outline status="primary" (click)="addProduct(product)">Agregar</button>
         </div>
       </nb-card-footer>
     </nb-card>

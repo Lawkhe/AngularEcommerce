@@ -97,6 +97,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           let user = JSON.parse(localStorage.getItem('session')) || null;
           if (user){
             localStorage.removeItem('session');
+            localStorage.removeItem('cart');
           }
           this.router.navigate(['/login']);
         }
