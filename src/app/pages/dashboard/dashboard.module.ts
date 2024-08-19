@@ -9,6 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from './dashboard.component';
 
 import { NgxEchartsModule } from 'ngx-echarts';
+import { EchartsComponent } from './echarts/echarts.component';
+import { EchartsPieComponent } from './echarts/echarts-pie.component';
+import { EchartsBarComponent } from './echarts/echarts-bar.component';
 
 @NgModule({
   imports: [
@@ -25,6 +28,9 @@ import { NgxEchartsModule } from 'ngx-echarts';
   ],
   declarations: [
     DashboardComponent,
+    EchartsComponent,
+    EchartsPieComponent,
+    EchartsBarComponent,
   ],
   providers: [
   ],

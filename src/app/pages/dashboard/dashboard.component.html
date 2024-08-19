@@ -1,3 +1,33 @@
 <div class="row">
-    <h3>Dashboard</h3>
+  <div class="col-12 col-md-6">
+    <nb-card>
+      <div class="icon-container">
+        <div class="icon status-success">
+          <nb-icon icon="checkmark-circle-2-outline"></nb-icon>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="title h5">Productos Activos</div>
+        <div class="status paragraph-2">{{ on_products }}</div>
+      </div>
+    </nb-card>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <nb-card>
+      <div class="icon-container">
+        <div class="icon status-danger">
+          <nb-icon icon="close-circle-outline"></nb-icon>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="title h5">Productos Inactivos</div>
+        <div class="status paragraph-2">{{ off_products }}</div>
+      </div>
+    </nb-card>
+  </div>
 </div>
+
+<ngx-echarts></ngx-echarts>
