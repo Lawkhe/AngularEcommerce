@@ -8,6 +8,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
+import { DiscountModule } from './discount/discount.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ProductModule } from './product/product.module';
     UserModule,
     CategoryModule,
     ProductModule,
+    DiscountModule
   ],
   declarations: [
     PagesComponent,

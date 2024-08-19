@@ -27,6 +27,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Ítems',
         link: '/pages/product',
       },
+      {
+        title: 'Descuentos',
+        link: '/pages/discount',
+      },
     ],
   },
 ];

@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastService } from '../../usable/toast.service';
-import { ProductService } from '../../services/product.service';
-import { CategoryService } from '../../services/category.service';
+import { DiscountService } from '../../services/discount.service';
 
 @Component({
-  selector: 'ngx-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss'],
+  selector: 'ngx-discount',
+  templateUrl: './discount.component.html',
+  styleUrls: ['./discount.component.scss'],
 })
-export class ProductComponent {
+export class DiscountComponent {
   data;
-  // settings: Object;
-  select_category = [];
 
   settings = {
     // mode: 'external',
-    noDataMessage: 'Sin Productos',
+    noDataMessage: 'Sin Descuentos',
     pager: {
       display: true,
       perPage: 10,
@@ -43,55 +40,28 @@ export class ProductComponent {
       confirmDelete: true,
     },
     columns: {
-      name: {
-        title: 'Nombre',
-        type: 'string',
-        filter: {
-          type: "string",
-        }
-      },
-      price: {
-        title: 'Precio',
+      percentage: {
+        title: 'Porcentaje',
         type: 'number',
         filter: {
           type: "number",
         }
       },
-      amount: {
-        title: 'Cantidad',
-        type: 'number',
+      initDate: {
+        title: 'Fecha de Inicio',
+        editable: true,
+        type: 'date',
         filter: {
-          type: "number",
+          type: "date",
         }
       },
-      image: {
-        title: 'Link Imagen',
+      endDate: {
+        title: 'Fecha de Finalización',
         editable: true,
-        type: 'string',
+        type: 'date',
         filter: {
-          type: "string",
+          type: "date",
         }
-      },
-      categoryId: {
-        title: 'Categoría',
-        editable: true,
-        valuePrepareFunction: (value) => {
-          return this.select_category.filter(category => category.value == value).map(category => category.title)[0];
-        },
-        filter: {
-          type: 'list',
-          config: {
-            selectText: 'Buscar por categoría...',
-            list: [],
-          },
-        },
-        editor: {
-          type: 'list',
-          config: {
-            selectText: 'Selecciona la categoría',
-            list: []
-          },
-        },
       },
       state: {
         title: 'Estado',
@@ -129,24 +99,11 @@ export class ProductComponent {
   load = true;
 
   constructor(
-    private productService:ProductService,
-    private categoryService:CategoryService,
+    private discountService:DiscountService,
     private toastService: ToastService,
   ){
 
-    this.categoryService.view().subscribe(
-      response => {
-        response.forEach(category => {
-          this.select_category.push({value: category['id'], title: category['name']});
-        });
-
-        this.settings.columns.categoryId.editor.config.list = this.select_category;
-        this.settings.columns.categoryId.filter.config.list = this.select_category;
-        this.settings = Object.assign({}, this.settings);
-      }
-    );
-
-    this.productService.view().subscribe(
+    this.discountService.view().subscribe(
       response => {
         this.data = response
       }
@@ -154,8 +111,8 @@ export class ProductComponent {
   }
 
   onDeleteConfirm(event): void {
-    this.productService.delete(event.data.id).subscribe(response => {
-      this.toastService.showToast('success', 'Listo', 'Producto eliminado.');
+    this.discountService.delete(event.data.id).subscribe(response => {
+      this.toastService.showToast('success', 'Listo', 'Categoría eliminada.');
       event.confirm.resolve();
       this.load = true;
     });
@@ -164,16 +121,10 @@ export class ProductComponent {
   onCreateConfirm(event): void {
     if (this.load) {
       this.load = false;
-      let data = {
-        name: event.newData.name,
-        price: event.newData.price,
-        amount: event.newData.amount,
-        image: event.newData.image,
-        categoryId: Number(event.newData.categoryId),
-        state: event.newData.state,
-      }
-      this.productService.create(data).subscribe(response => {
-        this.toastService.showToast('success', 'Listo', 'Producto creado correctamente.');
+      event.newData['password'] = event.newData['name'];
+
+      this.discountService.create(event.newData).subscribe(response => {
+        this.toastService.showToast('success', 'Listo', 'Categoría creada correctamente.');
         event.newData['id'] = response['id'];
         event.confirm.resolve(event.newData);
         this.load = true;
@@ -194,15 +145,13 @@ export class ProductComponent {
       this.load = false;
       let data = {
         id: event.newData.id,
-        name: event.newData.name,
-        price: event.newData.price,
-        amount: event.newData.amount,
-        image: event.newData.image,
-        categoryId: Number(event.newData.categoryId),
+        percentage: event.newData.percentage,
+        initDate: event.newData.initDate,
+        endDate: event.newData.endDate,
         state: event.newData.state,
       }
-      this.productService.update(data).subscribe(response => {
-        this.toastService.showToast('success', 'Listo', 'Producto actualizado correctamente.');
+      this.discountService.update(data).subscribe(response => {
+        this.toastService.showToast('success', 'Listo', 'Categoría actualizada correctamente.');
         event.confirm.resolve(event.newData);
         this.load = true;
       });

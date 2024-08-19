@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
+import { DiscountComponent } from './discount/discount.component';
 
 const routes: Routes = [{
   path: '',
@@ -27,6 +28,10 @@ const routes: Routes = [{
     {
       path: 'product',
       component: ProductComponent,
+    },
+    {
+      path: 'discount',
+      component: DiscountComponent,
     },
     {
       path: '',
